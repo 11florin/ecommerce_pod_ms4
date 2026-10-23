@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 
 from . models import Category, Product
 
@@ -18,3 +19,10 @@ def categories(request):
         "all_categories": all_categories
     }
 
+def product_info(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+    context = {
+        "product": product,
+    }
+
+    return render(request, "store/product-info.html", context)
